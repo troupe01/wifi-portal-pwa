@@ -2,7 +2,7 @@
   "name": "WiFi Portal - tebudiv3.net",
   "short_name": "WiFi Portal",
   "description": "Akses cepat ke portal login WiFi tebudiv3.net",
-  "start_url": "/",
+  "start_url": "/wifi-portal-pwa/",
   "display": "standalone",
   "background_color": "#667eea",
   "theme_color": "#667eea",
@@ -22,5 +22,5 @@
     }
   ],
   "categories": ["utilities", "productivity"],
-  "scope": "/"
+  "scope": "/wifi-portal-pwa/"
 }
