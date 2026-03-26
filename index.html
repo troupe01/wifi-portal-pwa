@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="WiFi Portal Login - tebudiv3.net">
+    
+    <!-- PWA Settings -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <title>WiFi Portal</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #718096;
+            font-size: 15px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        .info h3 {
+            color: #2d3748;
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info li {
+            color: #4a5568;
+            font-size: 13px;
+            padding: 6px 0;
+            display: flex;
+            align-items: start;
+            gap: 8px;
+        }
+
+        .info li:before {
+            content: "✓";
+            color: #48bb78;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .install-prompt {
+            margin-top: 20px;
+            padding: 15px;
+            background: #edf2f7;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .install-prompt strong {
+            color: #2d3748;
+        }
+
+        #installButton {
+            margin-top: 15px;
+            background: #48bb78;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+        }
+
+        #installButton:hover {
+            box-shadow: 0 6px 20px rgba(72, 187, 120, 0.5);
+        }
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading .spinner {
+            display: inline-block;
+        }
+
+        .loading .btn-text {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">📶</div>
+        <h1>WiFi Portal</h1>
+        <p>Akses cepat ke portal login WiFi tebudiv3.net</p>
+        
+        <button class="btn" onclick="openPortal()">
+            <span class="btn-text">🚀 Buka Portal WiFi</span>
+            <span class="spinner"></span>
+        </button>
+
+        <div id="installPrompt" class="install-prompt" style="display: none;">
+            <strong>📱 Install sebagai Aplikasi</strong><br>
+            Tap tombol di bawah untuk install PWA ini ke layar utama. Setelah diinstall, akan muncul seperti aplikasi biasa dan bisa diakses dari launcher.
+            <button id="installButton" class="btn">⬇️ Install Aplikasi</button>
+        </div>
+
+        <div class="info">
+            <h3>💡 Cara Pakai</h3>
+            <ul>
+                <li>Tap "Buka Portal WiFi" untuk akses tebudiv3.net</li>
+                <li>Install app ini agar muncul di launcher</li>
+                <li>Bisa diakses seperti aplikasi biasa</li>
+                <li>Tidak perlu browser lagi setelah diinstall</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let deferredPrompt;
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('Service Worker registered'))
+                    .catch(err => console.log('Service Worker registration failed'));
+            });
+        }
+
+        // Install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installPrompt').style.display = 'block';
+        });
+
+        document.getElementById('installButton').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response: ${outcome}`);
+                deferredPrompt = null;
+                if (outcome === 'accepted') {
+                    document.getElementById('installPrompt').style.display = 'none';
+                }
+            }
+        });
+
+        // After installation
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA installed');
+            document.getElementById('installPrompt').style.display = 'none';
+        });
+
+        function openPortal() {
+            const btn = event.target.closest('.btn');
+            btn.classList.add('loading');
+            
+            // Open portal
+            setTimeout(() => {
+                window.location.href = 'http://tebudiv3.net/login';
+            }, 500);
+        }
+
+        // Check if already installed
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('Running as installed PWA');
+            document.getElementById('installPrompt').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
